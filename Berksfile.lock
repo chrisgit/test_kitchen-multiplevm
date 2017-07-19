@@ -1,0 +1,7 @@
+DEPENDENCIES
+  multivm
+    path: .
+    metadata: true
+
+GRAPH
+  multivm (1.0.0)

@@ -1,0 +1,29 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+- name: webserver
+  driver_config:
+    box: bento/ubuntu-14.04
+    network:
+    - ["private_network", {ip: "192.168.50.4"}]
+
+- name: webclient
+  driver_config:
+    box: bento/ubuntu-14.04
+    network:
+    - ["private_network", {ip: "192.168.50.5"}]
+
+suites:
+- name: web-server
+  run_list:
+  - recipe[multivm::server]
+  excludes: ["webclient"]
+- name: web-client
+  run_list:
+  - recipe[multivm::client]
+  excludes: ["webserver"]
